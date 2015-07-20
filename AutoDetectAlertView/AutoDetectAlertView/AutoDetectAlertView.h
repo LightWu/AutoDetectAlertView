@@ -39,6 +39,8 @@ NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectAlertView : NSObject
 
 @property (nonatomic) NSInteger cancelButtonIndex;
 
+@property (nonatomic) NSInteger tag;
+
 + (ADA_INSTANCETYPE) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
 - (id) initTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
 - (UITextField*) textFieldAtIndex:(NSInteger)index;

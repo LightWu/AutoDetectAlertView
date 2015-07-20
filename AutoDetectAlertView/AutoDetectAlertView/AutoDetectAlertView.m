@@ -35,7 +35,6 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 
 @synthesize alertViewStyle=_alertViewStyle;
 
-
 + (instancetype) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles {
     
     return [[[self class] alloc] initTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles];
