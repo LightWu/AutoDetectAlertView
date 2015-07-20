@@ -32,7 +32,7 @@
 
 - (IBAction) test:(id)sender {
     
-    AutoDetectAlertView *test=[[AutoDetectAlertView alloc] initTitle:@"MainTitle" message:@"subTitle" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"]];
+    AutoDetectAlertView *test=[[AutoDetectAlertView alloc] initTitle:@"MainTitle" message:@"subTitle" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"]];
     
     [test setAlertViewStyle:ADAlertStyleLoginAndPasswordInput];
     

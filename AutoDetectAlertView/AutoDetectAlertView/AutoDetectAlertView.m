@@ -101,11 +101,19 @@ AutoDetectAlertView *_autoDetectAlert=nil;
             
             self.delegate=delegate;
             
+            if (delegate!=nil && [delegate isKindOfClass:[UIViewController class]]) {
+                viewController=delegate;
+            } else {
+                if (upIOS8) {
+                    viewController=[[UIApplication sharedApplication] keyWindow].rootViewController;
+                }
+            }
+            
             if (_autoDetectAlert==nil) {
                 _autoDetectAlert=self;
             }
             
-            viewController=delegate;
+            
             
         });
         
@@ -251,6 +259,7 @@ AutoDetectAlertView *_autoDetectAlert=nil;
             @autoreleasepool {
                 
                 [viewController presentViewController:ADAlertController animated:YES completion:nil];
+                
             }
         } else {
             [ADAlertView show];
