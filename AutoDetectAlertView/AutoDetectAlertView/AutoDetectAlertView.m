@@ -255,15 +255,18 @@ AutoDetectAlertView *_autoDetectAlert=nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (upIOS8) {
-            @autoreleasepool {
-                
-                [viewController presentViewController:ADAlertController animated:YES completion:nil];
-            }
+            [self performSelector:@selector(presentViewController) withObject:nil afterDelay:0.0];
         } else {
             [ADAlertView show];
         }
         
     });
+}
+
+- (void) presentViewController {
+    @autoreleasepool {
+        [viewController presentViewController:ADAlertController animated:YES completion:nil];
+    }
 }
 
 - (void) dealloc {
