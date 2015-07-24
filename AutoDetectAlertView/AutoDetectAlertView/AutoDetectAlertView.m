@@ -105,15 +105,15 @@ AutoDetectAlertView *_autoDetectAlert=nil;
             } else {
                 if (upIOS8) {
                     viewController=[[UIApplication sharedApplication] keyWindow].rootViewController;
+                    if ([viewController isKindOfClass:[UINavigationController class]]) {
+                        viewController = [(UINavigationController*) viewController visibleViewController];
+                    }
                 }
             }
             
             if (_autoDetectAlert==nil) {
                 _autoDetectAlert=self;
             }
-            
-            
-            
         });
         
         return self;
@@ -258,7 +258,6 @@ AutoDetectAlertView *_autoDetectAlert=nil;
             @autoreleasepool {
                 
                 [viewController presentViewController:ADAlertController animated:YES completion:nil];
-                
             }
         } else {
             [ADAlertView show];
@@ -268,7 +267,7 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 }
 
 - (void) dealloc {
-    NSLog(@"dealloc");
+//    NSLog(@"dealloc");
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
