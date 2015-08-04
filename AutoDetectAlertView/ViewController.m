@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import "AutoDetectAlertView.h"
+#import "AutoDetectActionSheet.h"
 
-@interface ViewController () <AutoDetectAlertViewDelegate>
+@interface ViewController () <AutoDetectAlertViewDelegate, AutoDetectActionSheetDelegate>
 
 @end
 
@@ -31,13 +32,17 @@
 }
 
 - (IBAction) test:(id)sender {
-    
+    /*
     AutoDetectAlertView *test=[[AutoDetectAlertView alloc] initTitle:@"MainTitle" message:@"subTitle" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"]];
     
     [test setAlertViewStyle:ADAlertStyleLoginAndPasswordInput];
     
     [test show];
+     */
     
+    
+    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"MainTitle" message:@"message" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1",@"2",@"3"]];
+    [test show];
 }
 
 - (void) alertView:(AutoDetectAlertView*)alertView didClickButtonAtIndex:(NSInteger)index {
@@ -48,6 +53,10 @@
     
     NSLog(@"str1 :%@", str1);
     NSLog(@"str2 :%@", str2);
+}
+
+- (void) actionSheet:(AutoDetectActionSheet *)actionSheet didClickButtonAtIndex:(NSInteger)index withButtonTitle:(NSString *)buttonTitle {
+    NSLog(@"%d, %@", index, buttonTitle);
 }
 
 @end

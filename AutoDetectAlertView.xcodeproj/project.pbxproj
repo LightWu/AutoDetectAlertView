@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17F9947F1B70901700F3A6B6 /* AutoDetectActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9947E1B70901700F3A6B6 /* AutoDetectActionSheet.m */; };
 		17F9BAA21B58D69600F6D56E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9BAA11B58D69600F6D56E /* main.m */; };
 		17F9BAA51B58D69600F6D56E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9BAA41B58D69600F6D56E /* AppDelegate.m */; };
 		17F9BAA81B58D69600F6D56E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9BAA71B58D69600F6D56E /* ViewController.m */; };
@@ -28,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17F9947D1B70901700F3A6B6 /* AutoDetectActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoDetectActionSheet.h; sourceTree = "<group>"; };
+		17F9947E1B70901700F3A6B6 /* AutoDetectActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoDetectActionSheet.m; sourceTree = "<group>"; };
 		17F9BA9C1B58D69600F6D56E /* AutoDetectAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoDetectAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F9BAA01B58D69600F6D56E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17F9BAA11B58D69600F6D56E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17F9947C1B708FF900F3A6B6 /* AutoDetectActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				17F9947D1B70901700F3A6B6 /* AutoDetectActionSheet.h */,
+				17F9947E1B70901700F3A6B6 /* AutoDetectActionSheet.m */,
+			);
+			path = AutoDetectActionSheet;
+			sourceTree = "<group>";
+		};
 		17F9BA931B58D69600F6D56E = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +96,7 @@
 		17F9BA9E1B58D69600F6D56E /* AutoDetectAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				17F9947C1B708FF900F3A6B6 /* AutoDetectActionSheet */,
 				17F9BAC51B58D6B500F6D56E /* AutoDetectAlertView */,
 				17F9BAA31B58D69600F6D56E /* AppDelegate.h */,
 				17F9BAA41B58D69600F6D56E /* AppDelegate.m */,
@@ -235,6 +248,7 @@
 				17F9BAA81B58D69600F6D56E /* ViewController.m in Sources */,
 				17F9BAC81B58D6C800F6D56E /* AutoDetectAlertView.m in Sources */,
 				17F9BAA51B58D69600F6D56E /* AppDelegate.m in Sources */,
+				17F9947F1B70901700F3A6B6 /* AutoDetectActionSheet.m in Sources */,
 				17F9BAA21B58D69600F6D56E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

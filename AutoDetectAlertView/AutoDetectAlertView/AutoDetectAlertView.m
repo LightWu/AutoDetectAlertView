@@ -277,7 +277,6 @@ AutoDetectAlertView *_autoDetectAlert=nil;
     if ([self.delegate respondsToSelector:@selector(alertView:didClickButtonAtIndex:)]) {
         [self.delegate alertView:self didClickButtonAtIndex:buttonIndex];
     }
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
     _autoDetectAlert=nil;
 }
