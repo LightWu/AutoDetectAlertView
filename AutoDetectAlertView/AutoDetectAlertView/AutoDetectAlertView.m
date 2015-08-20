@@ -103,10 +103,13 @@ AutoDetectAlertView *_autoDetectAlert=nil;
             if (delegate!=nil && [delegate isKindOfClass:[UIViewController class]]) {
                 viewController=delegate;
             } else {
-                if (upIOS8) {
-                    viewController=[[UIApplication sharedApplication] keyWindow].rootViewController;
+                viewController=[[UIApplication sharedApplication] keyWindow].rootViewController;
+                
+                while ([viewController isKindOfClass:[UINavigationController class]] || [viewController isKindOfClass:[UITabBarController class]]) {
                     if ([viewController isKindOfClass:[UINavigationController class]]) {
-                        viewController = [(UINavigationController*) viewController visibleViewController];
+                        viewController=[(UINavigationController*) viewController visibleViewController];
+                    } else if ([viewController isKindOfClass:[UITabBarController class]]) {
+                        viewController=[(UITabBarController*)viewController selectedViewController];
                     }
                 }
             }

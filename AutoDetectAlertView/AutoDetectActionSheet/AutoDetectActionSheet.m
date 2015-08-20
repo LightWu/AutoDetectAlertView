@@ -117,8 +117,13 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
                 viewController=delegate;
             } else {
                 viewController=[[UIApplication sharedApplication] keyWindow].rootViewController;
-                if ([viewController isKindOfClass:[UINavigationController class]]) {
-                    viewController = [(UINavigationController*) viewController visibleViewController];
+                
+                while ([viewController isKindOfClass:[UINavigationController class]] || [viewController isKindOfClass:[UITabBarController class]]) {
+                    if ([viewController isKindOfClass:[UINavigationController class]]) {
+                        viewController=[(UINavigationController*) viewController visibleViewController];
+                    } else if ([viewController isKindOfClass:[UITabBarController class]]) {
+                        viewController=[(UITabBarController*)viewController selectedViewController];
+                    }
                 }
             }
             
