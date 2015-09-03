@@ -145,9 +145,10 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (upIOS8) {
-            [self performSelector:@selector(presentViewController) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(presentViewController) withObject:nil afterDelay:0.1];
         } else {
-            [ADActionSheet showInView:viewController.view];
+            [NSThread sleepForTimeInterval:0.5];
+            [ADActionSheet performSelector:@selector(showInView:) withObject:viewController.view afterDelay:0.1];
         }
     });
 }

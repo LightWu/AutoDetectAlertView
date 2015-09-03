@@ -256,8 +256,9 @@ AutoDetectAlertView *_autoDetectAlert=nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (upIOS8) {
-            [self performSelector:@selector(presentViewController) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(presentViewController) withObject:nil afterDelay:0.1];
         } else {
+            [NSThread sleepForTimeInterval:0.5];
             [ADAlertView show];
         }
         
