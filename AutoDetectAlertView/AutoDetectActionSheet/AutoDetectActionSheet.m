@@ -155,6 +155,12 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
 
 - (void) presentViewController {
     @autoreleasepool {
+        if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad) {
+            // show in center, custom here when show actionsheet in another position.
+            ADActionSheetController.popoverPresentationController.sourceView = viewController.view;
+            ADActionSheetController.popoverPresentationController.sourceRect = viewController.view.bounds;
+            ADActionSheetController.popoverPresentationController.permittedArrowDirections=0;
+        }
         [viewController presentViewController:ADActionSheetController animated:YES completion:nil];
     }
 }
