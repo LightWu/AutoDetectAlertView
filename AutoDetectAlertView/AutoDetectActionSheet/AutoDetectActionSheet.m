@@ -167,15 +167,15 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if ([self.delegate respondsToSelector:@selector(actionSheet:didClickButtonAtIndex:withButtonTitle:)]) {
-        [self. delegate actionSheet:self didClickButtonAtIndex:buttonIndex withButtonTitle:[actionSheet buttonTitleAtIndex:buttonIndex]];
+    if (buttonIndex!=actionSheet.cancelButtonIndex) {
+        if ([self.delegate respondsToSelector:@selector(actionSheet:didClickButtonAtIndex:withButtonTitle:)]) {
+            [self. delegate actionSheet:self didClickButtonAtIndex:buttonIndex withButtonTitle:[actionSheet buttonTitleAtIndex:buttonIndex]];
+        }
     }
     
     [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
     
-    if (_autoDetectActionSheet==nil) {
-        _autoDetectActionSheet=self;
-    }
+    _autoDetectActionSheet=nil;
 }
 
 @end
