@@ -84,13 +84,13 @@ AutoDetectAlertView *_autoDetectAlert=nil;
                 
             } else {
                 
-                ADAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+                ADAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    for (int i = 0; i < otherButtonTitles.count; i++) {
-                        [ADAlertView addButtonWithTitle:otherButtonTitles[i]];
-                    }
-                });
+                for (int i = 0; i < otherButtonTitles.count; i++) {
+                    [ADAlertView addButtonWithTitle:otherButtonTitles[i]];
+                }
+                
+                ADAlertView.cancelButtonIndex=[ADAlertView addButtonWithTitle:cancelButtonTitle];
                 
                 self.cancelButtonIndex=ADAlertView.cancelButtonIndex;
                 
