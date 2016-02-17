@@ -17,7 +17,11 @@
 #endif
 #endif
 
+@class AutoDetectActionSheet;
 @protocol AutoDetectActionSheetDelegate;
+
+typedef void(^AutoDetectActionSheetBlock)(void);
+typedef void(^AutoDetectActionSheetButtonBlock)(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle);
 
 NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectActionSheet : NSObject <UIActionSheetDelegate>
 
@@ -27,12 +31,17 @@ NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectActionSheet : NSObject <UIActio
 
 @property (nonatomic) NSInteger destructiveButtonIndex;
 
+@property (nonatomic, copy) AutoDetectActionSheetButtonBlock actionSheetButtonAction;
+
 @property (nonatomic) NSInteger tag;
 
 + (ADA_INSTANCETYPE) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle destructiveButtonTitle:(NSString*)destructiveButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
-- (id) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle destructiveButtonTitle:(NSString*)destructiveButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
+
++ (ADA_INSTANCETYPE) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonAction:(AutoDetectActionSheetButtonBlock)buttonActions;
 
 - (void) show;
+
+- (void) showInBlock:(AutoDetectActionSheetBlock)block;
 
 @end
 

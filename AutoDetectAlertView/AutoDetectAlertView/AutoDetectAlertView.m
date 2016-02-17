@@ -9,8 +9,6 @@
 #import "AutoDetectAlertView.h"
 #import "AppDelegate.h"
 
-#define upIOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) ? YES : NO
-
 AutoDetectAlertView *_autoDetectAlert=nil;
 
 @interface AutoDetectAlertView () <UIAlertViewDelegate> {
@@ -48,7 +46,7 @@ AutoDetectAlertView *_autoDetectAlert=nil;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            if (upIOS8) {
+            if ([UIAlertController class]) {
                 
                 ADAlertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
                 
@@ -121,14 +119,102 @@ AutoDetectAlertView *_autoDetectAlert=nil;
     }
 }
 
++ (instancetype) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions {
+    return [[[self class] alloc] initTitle:title message:message cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles buttonActionBlock:buttonActions];
+}
+
+- (id) initTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions {
+    
+    
+    @autoreleasepool {
+        
+        self=[super init];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.alertViewButtonAction = buttonActions;
+            
+            if ([UIAlertController class]) {
+                
+                ADAlertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+                
+                for (int i = 0; i < otherButtonTitles.count; i++) {
+                    UIAlertAction *act=[UIAlertAction actionWithTitle:otherButtonTitles[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        
+                        if (self.alertViewButtonAction) {
+                            self.alertViewButtonAction(self, i);
+                        }
+                        _autoDetectAlert=nil;
+                        ADAlertController=nil;
+                    }];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [ADAlertController addAction:act];
+                    });
+                    
+                }
+                
+                UIAlertAction *act=[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    
+                    if (self.alertViewButtonAction) {
+                        self.alertViewButtonAction(self, -1);
+                    }
+                    _autoDetectAlert=nil;
+                    ADAlertController=nil;
+                }];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ADAlertController addAction:act];
+                });
+                
+                
+                self.cancelButtonIndex=-1;
+                
+            } else {
+                
+                ADAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+                
+                for (int i = 0; i < otherButtonTitles.count; i++) {
+                    [ADAlertView addButtonWithTitle:otherButtonTitles[i]];
+                }
+                
+                ADAlertView.cancelButtonIndex=[ADAlertView addButtonWithTitle:cancelButtonTitle];
+                
+                self.cancelButtonIndex=ADAlertView.cancelButtonIndex;
+                
+            }
+            
+            self.delegate=nil;
+            
+            viewController=[[UIApplication sharedApplication] keyWindow].rootViewController;
+            
+            while ([viewController isKindOfClass:[UINavigationController class]] || [viewController isKindOfClass:[UITabBarController class]]) {
+                if ([viewController isKindOfClass:[UINavigationController class]]) {
+                    viewController=[(UINavigationController*) viewController visibleViewController];
+                } else if ([viewController isKindOfClass:[UITabBarController class]]) {
+                    viewController=[(UITabBarController*)viewController selectedViewController];
+                }
+            }
+            
+            if (_autoDetectAlert==nil) {
+                _autoDetectAlert=self;
+            }
+        });
+        
+    }
+    
+    return self;
+}
+
 - (void) setAlertViewStyle:(AutoDetectAlertViewStyle)alertViewStyle {
     
     _alertViewStyle=alertViewStyle;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        if (upIOS8) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([UIAlertController class]) {
+            
             switch (alertViewStyle) {
+                    
                 case ADAlertStyleDefault:
                     
                     break;
@@ -149,6 +235,7 @@ AutoDetectAlertView *_autoDetectAlert=nil;
                         textField.placeholder = NSLocalizedString(@"Login", @"Login");
                         textField.tag=ADAlertLoginTextField;
                     }];
+                    
                     [ADAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                         textField.placeholder = NSLocalizedString(@"Password", @"Password");
                         textField.secureTextEntry = YES;
@@ -160,30 +247,19 @@ AutoDetectAlertView *_autoDetectAlert=nil;
                     break;
             }
         } else {
-            switch (alertViewStyle) {
-                case ADAlertStyleDefault:
-                    ADAlertView.alertViewStyle=UIAlertViewStyleDefault;
-                    break;
-                case ADAlertStylePlainTextInput:
-                    ADAlertView.alertViewStyle=UIAlertViewStylePlainTextInput;
-                    break;
-                case ADAlertStyleSecureTextInput:
-                    ADAlertView.alertViewStyle=UIAlertViewStyleSecureTextInput;
-                    break;
-                case ADAlertStyleLoginAndPasswordInput:
-                    ADAlertView.alertViewStyle=UIAlertViewStyleLoginAndPasswordInput;
-                    break;
-                default:
-                    break;
-            }
+            
+            ADAlertView.alertViewStyle = (UIAlertViewStyle)alertViewStyle;
         }
     });
+    
 }
 
 - (UITextField*) textFieldAtIndex:(NSInteger)index {
     
-    if (upIOS8) {
+    if ([UIAlertController class]) {
+        
         switch (_alertViewStyle) {
+                
             case ADAlertStyleDefault:
                 
                 break;
@@ -216,6 +292,7 @@ AutoDetectAlertView *_autoDetectAlert=nil;
         }
     } else {
         switch (_alertViewStyle) {
+                
             case ADAlertStyleDefault:
                 
                 break;
@@ -253,22 +330,27 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 
 - (void) show {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if (upIOS8) {
-            [self performSelector:@selector(presentViewController) withObject:nil afterDelay:0.1];
+        if ([UIAlertController class]) {
+            
+            @autoreleasepool {
+                
+                [viewController presentViewController:ADAlertController animated:YES completion:nil];
+                
+            }
         } else {
-            [NSThread sleepForTimeInterval:0.5];
+            
             [ADAlertView show];
         }
         
     });
 }
 
-- (void) presentViewController {
-    @autoreleasepool {
-        [viewController presentViewController:ADAlertController animated:YES completion:nil];
-    }
+- (void) showInBlock:(AutoDetectAlertViewBlock)block {
+    [self show];
+    
+    block();
 }
 
 - (void) dealloc {
@@ -276,9 +358,15 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if ([self.delegate respondsToSelector:@selector(alertView:didClickButtonAtIndex:)]) {
+        
         [self.delegate alertView:self didClickButtonAtIndex:buttonIndex];
+    } else if (self.alertViewButtonAction) {
+        
+        self.alertViewButtonAction(self, buttonIndex);
     }
+    
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
     _autoDetectAlert=nil;
 }

@@ -31,19 +31,52 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction) test:(id)sender {
-    /*
-    AutoDetectAlertView *test=[[AutoDetectAlertView alloc] initTitle:@"MainTitle" message:@"subTitle" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"]];
+#pragma mark - IBActions
+
+- (IBAction) showAlertWithDelegate:(id)sender {
+    
+    AutoDetectAlertView *test=[AutoDetectAlertView initWithTitle:@"AlertView" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"]];
     
     [test setAlertViewStyle:ADAlertStyleLoginAndPasswordInput];
     
-    [test show];
-     */
+    [test showInBlock:^{
+        NSLog(@"finished");
+    }];
     
-    
-    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"MainTitle" message:@"message" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1",@"2",@"3"]];
-    [test show];
 }
+
+- (IBAction) showAlertWithBlock:(id)sender {
+    
+    [[AutoDetectAlertView initWithTitle:@"AlertView" message:@"With Block"cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"] buttonActionBlock:^(AutoDetectAlertView *alertView, NSInteger index) {
+        
+        NSLog(@"clicked button index : %d", index);
+        
+        NSString *str1=[alertView textFieldAtIndex:ADAlertLoginTextField].text;
+        NSString *str2=[alertView textFieldAtIndex:ADAlertPasswordTextField].text;
+        
+        NSLog(@"str1 :%@", str1);
+        NSLog(@"str2 :%@", str2);
+    }] show];
+}
+
+- (IBAction) showActionSheetWithDelegate:(id)sender {
+    
+    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1",@"2",@"3"]];
+    
+    [test showInBlock:^{
+        NSLog(@"finished");
+    }];
+}
+
+- (IBAction) showActionSheetWithBlock:(id)sender {
+    [[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Block" cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1", @"2", @"3"] buttonAction:^(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle) {
+        
+        NSLog(@"%d, %@", index, buttonTitle);
+        
+    }] show];
+}
+
+#pragma mark - Use Delegate
 
 - (void) alertView:(AutoDetectAlertView*)alertView didClickButtonAtIndex:(NSInteger)index {
     NSLog(@"clicked button index : %d", index);

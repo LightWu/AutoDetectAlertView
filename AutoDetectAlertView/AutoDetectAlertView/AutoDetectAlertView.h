@@ -17,6 +17,8 @@
 #endif
 #endif
 
+@class AutoDetectAlertView;
+
 typedef NS_ENUM(NSInteger, AutoDetectAlertViewStyle) {
     ADAlertStyleDefault                 = 0,
     ADAlertStyleSecureTextInput,
@@ -29,6 +31,10 @@ typedef NS_ENUM(NSInteger, AutoDetectTextFieldIndex) {
     ADAlertPasswordTextField=1,
 };
 
+typedef void(^AutoDetectAlertViewBlock)(void);
+
+typedef void(^AutoDetectAlertViewButtonAction)(AutoDetectAlertView *alertView, NSInteger index);
+
 @protocol AutoDetectAlertViewDelegate;
 
 NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectAlertView : NSObject
@@ -37,14 +43,21 @@ NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectAlertView : NSObject
 
 @property (assign, nonatomic) AutoDetectAlertViewStyle alertViewStyle;
 
+@property (nonatomic, copy) AutoDetectAlertViewButtonAction alertViewButtonAction;
+
 @property (nonatomic) NSInteger cancelButtonIndex;
 
 @property (nonatomic) NSInteger tag;
 
 + (ADA_INSTANCETYPE) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
-- (id) initTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
+
++ (ADA_INSTANCETYPE) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions;
+
 - (UITextField*) textFieldAtIndex:(NSInteger)index;
+
 - (void) show;
+
+- (void) showInBlock:(AutoDetectAlertViewBlock)block;
 
 @end
 
