@@ -21,7 +21,7 @@
 @protocol AutoDetectActionSheetDelegate;
 
 typedef void(^AutoDetectActionSheetBlock)(void);
-typedef void(^AutoDetectActionSheetButtonBlock)(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle);
+typedef void(^AutoDetectActionSheetButtonAction)(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle);
 
 NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectActionSheet : NSObject <UIActionSheetDelegate>
 
@@ -31,19 +31,19 @@ NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectActionSheet : NSObject <UIActio
 
 @property (nonatomic) NSInteger destructiveButtonIndex;
 
-@property (nonatomic, copy) AutoDetectActionSheetButtonBlock actionSheetButtonAction;
+@property (nonatomic, copy) AutoDetectActionSheetButtonAction actionSheetButtonAction;
 
 @property (nonatomic) NSInteger tag;
 
 + (ADA_INSTANCETYPE) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle destructiveButtonTitle:(NSString*)destructiveButtonTitle otherButtonTitles:(NSString*)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
-+ (ADA_INSTANCETYPE) initWithTitle:(NSString *)title message:(NSString *)message buttonAction:(AutoDetectActionSheetButtonBlock)buttonActions cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
++ (ADA_INSTANCETYPE) initWithTitle:(NSString *)title message:(NSString *)message buttonAction:(AutoDetectActionSheetButtonAction)buttonActions cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (void) show;
 
 - (void) showInBlock:(AutoDetectActionSheetBlock)block;
 
-- (void) setActionSheetButtonAction:(AutoDetectActionSheetButtonBlock)actionSheetButtonAction;
+- (void) setActionSheetButtonAction:(AutoDetectActionSheetButtonAction)actionSheetButtonAction;
 
 @end
 

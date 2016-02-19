@@ -144,7 +144,7 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
     }
 }
 
-+ (instancetype) initWithTitle:(NSString *)title message:(NSString *)message buttonAction:(AutoDetectActionSheetButtonBlock)buttonActions cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
++ (instancetype) initWithTitle:(NSString *)title message:(NSString *)message buttonAction:(AutoDetectActionSheetButtonAction)buttonActions cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
     
     NSMutableArray *btnTitles = [NSMutableArray array];
     va_list args;
@@ -159,7 +159,7 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
     return [[[self class] alloc] initWithTitle:title message:message cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:btnTitles buttonAction:buttonActions];
 }
 
-- (id) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonAction:(AutoDetectActionSheetButtonBlock)buttonActions {
+- (id) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonAction:(AutoDetectActionSheetButtonAction)buttonActions {
     @autoreleasepool {
         
         self=[super init];

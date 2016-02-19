@@ -16,6 +16,7 @@
 		17F9BAB01B58D69600F6D56E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17F9BAAE1B58D69600F6D56E /* LaunchScreen.xib */; };
 		17F9BABC1B58D69600F6D56E /* AutoDetectAlertViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9BABB1B58D69600F6D56E /* AutoDetectAlertViewTests.m */; };
 		17F9BAC81B58D6C800F6D56E /* AutoDetectAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9BAC71B58D6C800F6D56E /* AutoDetectAlertView.m */; };
+		293F9ABC1C76B433002296F3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 293F9ABB1C76B433002296F3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		17F9BABB1B58D69600F6D56E /* AutoDetectAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoDetectAlertViewTests.m; sourceTree = "<group>"; };
 		17F9BAC61B58D6C800F6D56E /* AutoDetectAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoDetectAlertView.h; sourceTree = "<group>"; };
 		17F9BAC71B58D6C800F6D56E /* AutoDetectAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoDetectAlertView.m; sourceTree = "<group>"; };
+		293F9ABB1C76B433002296F3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		17F9BA9F1B58D69600F6D56E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				293F9ABB1C76B433002296F3 /* README.md */,
 				17F9BAA01B58D69600F6D56E /* Info.plist */,
 				17F9BAA11B58D69600F6D56E /* main.m */,
 			);
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				293F9ABC1C76B433002296F3 /* README.md in Sources */,
 				17F9BAA81B58D69600F6D56E /* ViewController.m in Sources */,
 				17F9BAC81B58D6C800F6D56E /* AutoDetectAlertView.m in Sources */,
 				17F9BAA51B58D69600F6D56E /* AppDelegate.m in Sources */,
