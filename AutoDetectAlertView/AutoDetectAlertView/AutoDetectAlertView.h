@@ -49,15 +49,17 @@ NS_CLASS_AVAILABLE_IOS(6_0) @interface AutoDetectAlertView : NSObject
 
 @property (nonatomic) NSInteger tag;
 
-+ (ADA_INSTANCETYPE) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles;
++ (ADA_INSTANCETYPE) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
-+ (ADA_INSTANCETYPE) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions;
++ (ADA_INSTANCETYPE) initWithTitle:(NSString *)title message:(NSString *)message buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (UITextField*) textFieldAtIndex:(NSInteger)index;
 
 - (void) show;
 
 - (void) showInBlock:(AutoDetectAlertViewBlock)block;
+
+- (void) setAlertViewButtonAction:(AutoDetectAlertViewButtonAction)alertViewButtonAction;
 
 @end
 

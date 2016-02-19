@@ -33,9 +33,19 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 
 @synthesize alertViewStyle=_alertViewStyle;
 
-+ (instancetype) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles {
++ (instancetype) initWithTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
     
-    return [[[self class] alloc] initTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles];
+    NSMutableArray *btnTitles = [NSMutableArray array];
+    va_list args;
+    va_start(args, otherButtonTitles);
+    
+    while (otherButtonTitles != nil) {
+        [btnTitles addObject:otherButtonTitles];
+        
+        otherButtonTitles = va_arg(args, NSString*);
+    }
+    
+    return [[[self class] alloc] initTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:btnTitles];
 }
  
 - (id) initTitle:(NSString*)title message:(NSString*)message delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitles:(NSArray*)otherButtonTitles {
@@ -119,8 +129,19 @@ AutoDetectAlertView *_autoDetectAlert=nil;
     }
 }
 
-+ (instancetype) initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions {
-    return [[[self class] alloc] initTitle:title message:message cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles buttonActionBlock:buttonActions];
++ (instancetype) initWithTitle:(NSString *)title message:(NSString *)message buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
+    
+    NSMutableArray *btnTitles = [NSMutableArray array];
+    va_list args;
+    va_start(args, otherButtonTitles);
+    
+    while (otherButtonTitles != nil) {
+        [btnTitles addObject:otherButtonTitles];
+        
+        otherButtonTitles = va_arg(args, NSString*);
+    }
+    
+    return [[[self class] alloc] initTitle:title message:message cancelButtonTitle:cancelButtonTitle otherButtonTitles:btnTitles buttonActionBlock:buttonActions];
 }
 
 - (id) initTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles buttonActionBlock:(AutoDetectAlertViewButtonAction)buttonActions {
@@ -348,6 +369,7 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 }
 
 - (void) showInBlock:(AutoDetectAlertViewBlock)block {
+    
     [self show];
     
     block();

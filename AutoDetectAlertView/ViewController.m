@@ -35,7 +35,7 @@
 
 - (IBAction) showAlertWithDelegate:(id)sender {
     
-    AutoDetectAlertView *test=[AutoDetectAlertView initWithTitle:@"AlertView" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"]];
+    AutoDetectAlertView *test=[AutoDetectAlertView initWithTitle:@"AlertView" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:@"0", @"1", @"2", nil];
     
     [test setAlertViewStyle:ADAlertStyleLoginAndPasswordInput];
     
@@ -47,7 +47,7 @@
 
 - (IBAction) showAlertWithBlock:(id)sender {
     
-    [[AutoDetectAlertView initWithTitle:@"AlertView" message:@"With Block"cancelButtonTitle:@"ok" otherButtonTitles:@[@"0", @"1", @"2"] buttonActionBlock:^(AutoDetectAlertView *alertView, NSInteger index) {
+    [[AutoDetectAlertView initWithTitle:@"AlertView" message:@"With Block" buttonActionBlock:^(AutoDetectAlertView *alertView, NSInteger index) {
         
         NSLog(@"clicked button index : %d", index);
         
@@ -56,12 +56,13 @@
         
         NSLog(@"str1 :%@", str1);
         NSLog(@"str2 :%@", str2);
-    }] show];
+        
+    } cancelButtonTitle:@"ok" otherButtonTitles:@"0", @"1", @"2", nil] show];
 }
 
 - (IBAction) showActionSheetWithDelegate:(id)sender {
     
-    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1",@"2",@"3"]];
+    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@"1",@"2",@"3",nil];
     
     [test showInBlock:^{
         NSLog(@"finished");
@@ -69,11 +70,14 @@
 }
 
 - (IBAction) showActionSheetWithBlock:(id)sender {
-    [[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Block" cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1", @"2", @"3"] buttonAction:^(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle) {
+    
+    
+    
+    [[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Block" buttonAction:^(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle) {
         
         NSLog(@"%d, %@", index, buttonTitle);
         
-    }] show];
+    } cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@"1", @"2", @"3", nil] show];
 }
 
 #pragma mark - Use Delegate
