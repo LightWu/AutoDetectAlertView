@@ -19,6 +19,8 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
     __weak UIViewController *viewController;
 }
 
+@property (nonatomic, copy) AutoDetectActionSheetBlock actionSheetBlock;
+
 @end
 
 @implementation AutoDetectActionSheet
@@ -284,20 +286,28 @@ AutoDetectActionSheet *_autoDetectActionSheet=nil;
                     ADActionSheetController.popoverPresentationController.sourceRect = viewController.view.bounds;
                     ADActionSheetController.popoverPresentationController.permittedArrowDirections=0;
                 }
-                [viewController presentViewController:ADActionSheetController animated:YES completion:nil];
+                [viewController presentViewController:ADActionSheetController animated:YES completion:^{
+                    if (self.actionSheetBlock) {
+                        self.actionSheetBlock();
+                    }
+                }];
             }
         } else {
             
             [ADActionSheet showInView:viewController.view];
+            
+            if (self.actionSheetBlock) {
+                self.actionSheetBlock();
+            }
         }
     });
 }
 
 - (void) showInBlock:(AutoDetectActionSheetBlock)block {
     
-    [self show];
+    self.actionSheetBlock=block;
     
-    block();
+    [self show];
 }
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

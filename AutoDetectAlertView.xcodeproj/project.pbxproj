@@ -47,7 +47,7 @@
 		17F9BABB1B58D69600F6D56E /* AutoDetectAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoDetectAlertViewTests.m; sourceTree = "<group>"; };
 		17F9BAC61B58D6C800F6D56E /* AutoDetectAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoDetectAlertView.h; sourceTree = "<group>"; };
 		17F9BAC71B58D6C800F6D56E /* AutoDetectAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoDetectAlertView.m; sourceTree = "<group>"; };
-		293F9ABB1C76B433002296F3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		293F9ABB1C76B433002296F3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

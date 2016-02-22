@@ -27,6 +27,8 @@ AutoDetectAlertView *_autoDetectAlert=nil;
     
 }
 
+@property (nonatomic, copy) AutoDetectAlertViewBlock alertViewBlock;
+
 @end
 
 @implementation AutoDetectAlertView
@@ -357,12 +359,20 @@ AutoDetectAlertView *_autoDetectAlert=nil;
             
             @autoreleasepool {
                 
-                [viewController presentViewController:ADAlertController animated:YES completion:nil];
+                [viewController presentViewController:ADAlertController animated:YES completion:^{
+                    if (self.alertViewBlock) {
+                        self.alertViewBlock();
+                    }
+                }];
                 
             }
         } else {
             
             [ADAlertView show];
+            
+            if (self.alertViewBlock) {
+                self.alertViewBlock();
+            }
         }
         
     });
@@ -370,9 +380,9 @@ AutoDetectAlertView *_autoDetectAlert=nil;
 
 - (void) showInBlock:(AutoDetectAlertViewBlock)block {
     
-    [self show];
+    self.alertViewBlock=block;
     
-    block();
+    [self show];
 }
 
 - (void) dealloc {
