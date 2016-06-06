@@ -62,7 +62,7 @@
 
 - (IBAction) showActionSheetWithDelegate:(id)sender {
     
-    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@"1",@"2",@"3",nil];
+    AutoDetectActionSheet *test=[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Delegate" delegate:self cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1",@"2",@"3"]];
     
     [test showInBlock:^{
         NSLog(@"finished");
@@ -71,13 +71,11 @@
 
 - (IBAction) showActionSheetWithBlock:(id)sender {
     
-    
-    
     [[AutoDetectActionSheet initWithTitle:@"ActionSheet" message:@"With Block" buttonAction:^(AutoDetectActionSheet *actionSheet, NSInteger buttonIndex, NSString *buttonTitle) {
         
         NSLog(@"%d, %@", index, buttonTitle);
         
-    } cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@"1", @"2", @"3", nil] show];
+    } cancelButtonTitle:@"ok" destructiveButtonTitle:@"des" otherButtonTitles:@[@"1", @"2", @"3"]] show];
 }
 
 #pragma mark - Use Delegate
